@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  SECURITY NOTE:
+  This app intentionally does NOT request android.permission.INTERNET.
+  Without that permission, Android's OS-level sandbox blocks this app from
+  opening any network socket at all — inbound or outbound — no matter what
+  the app's code tries to do. This is enforced by the operating system, not
+  just by app logic, so it can't be bypassed by a bug in this codebase.
+
+  If AI features are added later, this permission will need to be added
+  back deliberately and reviewed — its absence right now is the app's main
+  offline guarantee.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+
+    <application
+        android:label="Expense Tracker"
+        android:icon="@mipmap/ic_launcher"
+        android:allowBackup="false"
+        android:fullBackupContent="false"
+        android:usesCleartextTraffic="false">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+
+        <!--
+          No other <activity>, <service>, <receiver>, or <provider> in this
+          app is exported. Nothing outside this app — no other app on the
+          phone — can start, bind to, or send data into any component here.
+        -->
+    </application>
+</manifest>
